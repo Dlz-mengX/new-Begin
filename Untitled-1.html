@@ -1,0 +1,1707 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<title>“密”探--带你探索密码学的世界</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="/static/css/main.css" />
+	<link rel="stylesheet" href="/static/css/style.css" />
+	<noscript>
+		<link rel="stylesheet" href="/static/css/noscript.css" />
+	</noscript>
+
+	<!-- Bootstrap CSS v5.0.2 -->
+	<link rel="stylesheet" href="/static/css/bootstrap.min.css">
+
+	<link rel="stylesheet" href="/static/css/course.css">
+	<style>
+		#wrapper>.bg {
+			background-image: url("/static/images/overlay.png"),
+			linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
+			url("/static/images/bg.jpg");
+		}
+	</style>
+</head>
+
+<body class="is-loading">
+
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- 侧边栏导航 -->
+		<nav class="navbar navbar-light position-fixed">
+			<button class="navbar-toggler btn bg-light position-absolute" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+		</nav>
+		<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+			<div class="offcanvas-header">
+				<h5 class="offcanvas-title" id="offcanvasNavbarLabel">课程导航</h5>
+				<button type="button" class="btn-close text-reset shadow-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+			</div>
+			<div class="offcanvas-body">
+				<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+					<li class="nav-item">
+						<a class="nav-link text-dark" name="navScroll" onclick="navScroll('#preCourse')">序章：戚继光之反切密码</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link text-dark" name="navScroll" onclick="navScroll('#course1')">第一节：凯撒密码</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link text-dark" name="navScroll" onclick="navScroll('#course2')">第二节：乘数密码</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link text-dark" name="navScroll" onclick="navScroll('#course3')">第三节：仿射密码</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link text-dark" name="navScroll" onclick="navScroll('#course4')">第四节：密钥短语密码</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link text-dark" name="navScroll" onclick="navScroll('#course5')">第五节：维吉尼亚密码</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link text-dark" name="navScroll" onclick="navScroll('#course6')">第六节：RSA算法</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- Header -->
+		<header id="header">
+			<a href="#" class="logo">教程</a>
+		</header>
+
+		<!-- Nav -->
+		<nav id="nav">
+			<ul class="links">
+				<li><a href="index">首页</a></li>
+				<li class="active"><a href="study">教程</a></li>
+			</ul>
+		</nav>
+
+		<!-- Main -->
+		<div id="main">
+
+			<!-- Post -->
+			<section class="post">
+				<header class="major">
+					<span class="date">从这里开始</span>
+					<h1>"密探"<br />
+						带你探索密码学的世界</h1>
+					<p id="foreword"><a>前言</a></p>
+					<p>
+						密码学（Cryptography），是一门将信息进行加密处理与传递，以及分析加密信息的学科.
+					</p>
+					<p>
+						古典密码学主要关注信息的保密书写和传递，以及与其相对应的破译方法，以“替换法”为基础，
+						维吉尼亚密码为代表的字母表替换式加密法轮流使用多个不同的替换式密码表，依次对明文中的字母进行加密，多应用于军事与情报领域.
+					</p>
+					<p>
+						在西方语文中,密码学一词源于希腊语kryptós:隐藏的”，
+						和gráphein“书写”。根据以RSA为代表的公钥加密体系的出现，可以将密码学的发展过程分为古典密码学与现代密码学两部分。
+					</p>
+					<p>
+						现代密码学则建立在数学、计算机与通信科学的基础上，不只关注信息保密问题，还同时涉及信息发布的不可抵赖性（数字签名）、
+						以及在分布式计算中产生的来源于内部和外部的攻击的所有信息安全问题。
+					</p>
+					<p>
+						古典密码学与现代密码学的重要区别在于，
+						古典密码学的编码和破译通常依赖于设计者和敌手的创造力与技巧，作为一种实用性艺术存在，并没有对于密码学原件的清晰定义。
+						而现代密码学则起源于20世纪末出现的大量相关理论，这些理论使得现代密码学成为了一种可以系统而严格地学习的科学。
+						著名的密码学者Ron Rivest解释道：“密码学是关于如何在敌人存在的环境中通信”，自工程学的角度，这相当于密码学与纯数学的差异。
+						密码学的发展促进了计算机科学，特别是在于电脑与网络安全所使用的技术，如访问控制与信息的机密性。
+					</p>
+				</header>
+
+				<!-- 序章 -->
+				<h2 id="preCourse" class="pt-5">序章：戚继光之反切密码</h2>
+				<div class="image main"><img src="/static/images/pic01.jpg" alt="" /></div>
+				<p class="indent"> 明朝，抗倭名将戚继光发明了反切密码，他以两首诗作为“密码本”:一首是:“柳边求气低，波他争日时。莺蒙语出喜，打掌与君业知。”
+					另一首是:“春花香，秋山开，嘉宾欢歌须金杯，孤灯光辉烧银缸。之东郊，过西桥，鸡声催初天，奇梅歪遮沟。”
+					这两首诗歌是反切码全部秘密所在。
+				</p>
+				<p class="indent">
+					取第一首中的前15个字的声母，分别依次编号1至15;取第二首中的36字韵母，分别顺序编号1至36。
+					再将当时字音的八种声调，也按顺序编上号码1至8，形成完整的“反切码”体系。其使用方法是:如收到的情报上的密码有一串是5—25—2，
+					对照声母编号5是“低”字，韵母编号25是“西”字，两字的声母和韵母合到一起是di，对照声调是2，就可以切射出“敌”字。
+				</p>
+
+				<!-- 主课程 -->
+				
+				<div id="course1" class="course">
+					<h2 class="pt-5">第一节：凯撒密码</h2>
+					<div class="text-center pb-4 image main">
+						<img class="" src="/static/images/pic02.jpg" alt="" />
+					</div>
+
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title">实例</h5>
+							<h6 class="card-subtitle mb-2 text-muted">体验凯撒密码的移位加密</h6>
+
+							<!-- 折叠菜单栏 -->
+							<div class="btn-collapse row pb-3">
+								<button class="btn col-sm-2 col-3" type="button" data-bs-toggle="collapse" data-bs-target="#course1Text-1">
+									算法简介
+								</button>
+								<button class="btn col-sm-2 col-3" type="button" data-bs-toggle="collapse" data-bs-target="#course1Text-2">
+									加密原理
+								</button>
+								<button class="btn col-sm-2 col-3" type="button" data-bs-toggle="collapse" data-bs-target="#course1Text-3">
+									算法公式
+								</button>
+								<button class="btn col-sm-2 col-3" type="button" data-bs-toggle="collapse" data-bs-target="#course1Text-4">
+									公式解析
+								</button>
+							</div>
+
+							<div class="collapse indent" id="course1Text-1" data-bs-parent="#course1">
+								凯撒密码（Caesar cipher）是一种位移替换密码，这种密码是一种最简单且最广为人知的加密技术。
+								凯撒密码最早由古罗马军事统帅盖乌斯·尤利乌斯·凯撒在军队中用来传递加密信息，故称凯撒密码。也称恺撒加密、恺撒变换、变换加密。
+							</div>
+
+							<div class="collapse indent" id="course1Text-2" data-bs-parent="#course1">
+								凯撒密码是一种替换加密的技术，明文中的所有字母都在字母表上向后（或向前）按照一个固定数目进行偏移后被替换成密文。
+								例如，当偏移量是3的时候，所有的字母A将后移3位被替换成D，而B变成E，以此类推。
+							</div>
+
+							<div class="collapse indent" id="course1Text-3" data-bs-parent="#course1">
+								<p>加密变换: C=(t+k)mod 26,0≤t&lt;26,0≤k&lt;26。其中t为字母原来对应的位置，k为密钥，即偏移量.</p>
+								<p>解密变换: P=(t-k)mod 26,0≤t&lt;26,0≤k&lt;26.</p>
+							</div>
+
+							<div class="collapse indent" id="course1Text-4" data-bs-parent="#course1">
+								<p>(1) x mod y是任意整数x除以任意正整数y后取余数。因此，以加密变换C=(t+k)mod26为例，该式子表示：对于26的模，即用(t+k)除以26，得到相应的余数，加密变换后的结果C就是余数。</p>
+								<p>(2) 每个字母的原来对应的位置即为字母在字母表中的位置，从0开始计算。比如a的位置为0，b的位置为1，以此类推，y的位置为24，z的位置为25。</p>
+							</div>
+
+							<div class="mt-3">
+								<div class="input-group mt-2">
+									<div class="row" style="width: 100%;">
+										<span>明文: </span>
+										<input class="form-control col-12 mb-3 pt-3 pb-3" name="plaintext" placeholder="输入英文字母" type="text">
+										<span>明文序号: </span>
+										<input class="form-control col-12 mb-3 pt-3 pb-3" name="plaintextNumList" readonly="readonly" type="text">
+										<span>密文序号: </span>
+										<input class="form-control col-12 mb-3 pt-3 pb-3" name="ciphertextNumList" readonly="readonly" type="text">
+										<span>密文: </span>
+										<input class="form-control col-12 mb-3 pt-3 pb-3" name="ciphertext" readonly="readonly" type="text">
+
+										<button name="example" class="btn col-6 col-sm-3" type="button">生成例句</button>
+										<button name="parameter" class="btn col-6 col-sm-3" type="button" data-bs-toggle="collapse" data-bs-target="#course1-parameter">参数设置</button>
+										<button name="animation" class="btn col-6 col-sm-3" type="button" data-bs-toggle="collapse" data-bs-target="#course1-animation">动画演示</button>
+										<button name="encryption" class="btn col-6 col-sm-3" type="button">模拟加密</button>
+									</div>
+									<div class="collapse show text-center w-100" id="course1-parameter">
+										<div class="card p-4 m-auto mt-3 w-50">
+											<span class="text-danger verification" name="verification">请输入正确的参数!</span>
+											<div class="input-group">
+												<span class="input-group-text">位移量 K:</span>
+												<input class="form-control" name="parameter-k" placeholder="输入一个整数" type="number">
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="collapse show" id="course1-animation">
+									<table class="table table-bordered mt-4 mb-3">
+										<tbody class="text-center">
+											<tr class="table-num">
+												<td>0</td>
+												<td>1</td>
+												<td>2</td>
+												<td>3</td>
+												<td>4</td>
+												<td>5</td>
+												<td>6</td>
+												<td>7</td>
+												<td>8</td>
+												<td>9</td>
+												<td>10</td>
+												<td>11</td>
+												<td>12</td>
+											</tr>
+											<tr>
+												<td name="color-0">A</td>
+												<td name="color-1">B</td>
+												<td name="color-2">C</td>
+												<td name="color-3">D</td>
+												<td name="color-4">E</td>
+												<td name="color-5">F</td>
+												<td name="color-6">G</td>
+												<td name="color-7">H</td>
+												<td name="color-8">I</td>
+												<td name="color-9">J</td>
+												<td name="color-10">K</td>
+												<td name="color-11">L</td>
+												<td name="color-12">M</td>
+											</tr>
+											<tr class="table-num">
+												<td>13</td>
+												<td>14</td>
+												<td>15</td>
+												<td>16</td>
+												<td>17</td>
+												<td>18</td>
+												<td>19</td>
+												<td>20</td>
+												<td>21</td>
+												<td>22</td>
+												<td>23</td>
+												<td>24</td>
+												<td>25</td>
+											</tr>
+											<tr>
+												<td name="color-13">N</td>
+												<td name="color-14">O</td>
+												<td name="color-15">P</td>
+												<td name="color-16">Q</td>
+												<td name="color-17">R</td>
+												<td name="color-18">S</td>
+												<td name="color-19">T</td>
+												<td name="color-20">U</td>
+												<td name="color-21">V</td>
+												<td name="color-22">W</td>
+												<td name="color-23">X</td>
+												<td name="color-24">Y</td>
+												<td name="color-25">Z</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+
+				
+				<div id="course2" class="course">
+					<h2 class="pt-5">第二节：乘数密码</h2>
+					<div class="image main"><img src="/static/images/pic03.jpg" alt="" /></div>
+
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title">实例</h5>
+							<h6 class="card-subtitle mb-2 text-muted">体验乘数密码的乘法加密</h6>
+
+							<!-- 折叠菜单栏 -->
+							<div class="btn-collapse row pb-3">
+								<button class="btn col-sm-2 col-3" type="button" data-bs-toggle="collapse" data-bs-target="#course2Text-1">
+									算法简介
+								</button>
+								<button class="btn col-sm-2 col-3" type="button" data-bs-toggle="collapse" data-bs-target="#course2Text-2">
+									加密原理
+								</button>
+								<button class="btn col-sm-2 col-3" type="button" data-bs-toggle="collapse" data-bs-target="#course2Text-3">
+									算法公式
+								</button>
+								<button class="btn col-sm-2 col-3" type="button" data-bs-toggle="collapse" data-bs-target="#course2Text-4">
+									公式解析
+								</button>
+							</div>
+
+							<div class="collapse indent" id="course2Text-1" data-bs-parent="#course2">
+								乘数密码与凯撒密码不同的是采用乘法变换，乘数密码也是简单代替密码的一种，只是在凯撒密码的基础之上改变了变换方式。
+							</div>
+							<div class="collapse indent" id="course2Text-2" data-bs-parent="#course2">
+								乘数密码需要预先知道消息元素的个数，加密的本质其实是对明文消息所处的位置进行加密，
+								然后用明文消息中加密后位置所对应的明文字符代替。例如，明文字母A，D，Y的在字母表中的位置分别为1，4，25，选择5作为对字母位置的加密数，
+								加密后的位置为1*5=5,4*5=20,25*5=125，由字母表循环类推，得到位置对应的加密字母为E，T和U。
+							</div>
+							<div class="collapse indent" id="course2Text-3" data-bs-parent="#course2">
+								<p>加密变换: C=(t*k)mod 26,0≤t&lt;26,0&lt;k&lt;26。其中t为字母原来对应的位置，k为密钥即乘量.</p>
+								<p>解密变换: P=(t*k<sup>-1</sup>)mod 26,0≤t&lt;26,0≤k&lt;26。</p>
+								<p>显然,仅当gcd(k, q)=1（即k与q互质）时，C才是可逆变换.</p>
+							</div>
+							<div class="collapse indent" id="course2Text-4" data-bs-parent="#course2">
+								<p>(1) x mod y是任意整数x除以任意正整数y后取余数。因此，以加密变换C=(t*k)mod 26为例，该式子表示：对于26的模，即用(t*k)除以26，得到相应的余数，加密变换后的结果C就是余数。</p>
+								<p>(2) 每个字母的原来对应的位置即为字母在字母表中的位置，从0开始计算。比如a的位置为0，b的位置为1，以此类推，y的位置为24，z的位置为25。</p>
+								<p>(3) 对整数 x和x<sup>-1</sup>，若x≡x<sup>-1</sup>mod n，则称x和x<sup>-1</sup>关于模n互为模逆元，其中≡符号表示任意整数x和x<sup>-1</sup>除以任意正整数n后的余数相等。因此k<sup>-1</sup>在该式子中为k的模逆元，并不为倒数，注意不要混淆。</p>
+							</div>
+
+							<div class="mt-3">
+								<div class="input-group mt-2">
+									<div class="row" style="width: 100%;">
+										<span>明文: </span>
+										<input class="form-control col-12 mb-3 pt-3 pb-3" name="plaintext" placeholder="输入英文字母" type="text">
+										<span>明文序号: </span>
+										<input class="form-control col-12 mb-3 pt-3 pb-3" name="plaintextNumList" readonly="readonly" type="text">
+										<span>密文序号: </span>
+										<input class="form-control col-12 mb-3 pt-3 pb-3" name="ciphertextNumList" readonly="readonly" type="text">
+										<span>密文: </span>
+										<input class="form-control col-12 mb-3 pt-3 pb-3" name="ciphertext" readonly="readonly" type="text">
+
+										<button name="example" class="btn col-6 col-sm-3" type="button">生成例句</button>
+										<button name="parameter" class="btn col-6 col-sm-3" type="button" data-bs-toggle="collapse" data-bs-target="#course2-parameter">参数设置</button>
+										<button name="animation" class="btn col-6 col-sm-3" type="button" data-bs-toggle="collapse" data-bs-target="#course2-animation">动画演示</button>
+										<button name="encryption" class="btn col-6 col-sm-3" type="button">模拟加密</button>
+									</div>
+									<div class="collapse show text-center w-100" id="course2-parameter">
+										<div class="card p-4 m-auto mt-3 w-50">
+											<span class="text-danger verification" name="verification">请输入正确的参数!</span>
+											<div class="input-group">
+												<span class="input-group-text">乘量 K:</span>
+												<input class="form-control" name="parameter-k" placeholder="输入一个整数" type="number">
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="collapse show" id="course2-animation">
+									<table class="table table-bordered mt-4 mb-3">
+										<tbody class="text-center">
+											<tr class="table-num">
+												<td>0</td>
+												<td>1</td>
+												<td>2</td>
+												<td>3</td>
+												<td>4</td>
+												<td>5</td>
+												<td>6</td>
+												<td>7</td>
+												<td>8</td>
+												<td>9</td>
+												<td>10</td>
+												<td>11</td>
+												<td>12</td>
+											</tr>
+											<tr>
+												<td name="color-0">A</td>
+												<td name="color-1">B</td>
+												<td name="color-2">C</td>
+												<td name="color-3">D</td>
+												<td name="color-4">E</td>
+												<td name="color-5">F</td>
+												<td name="color-6">G</td>
+												<td name="color-7">H</td>
+												<td name="color-8">I</td>
+												<td name="color-9">J</td>
+												<td name="color-10">K</td>
+												<td name="color-11">L</td>
+												<td name="color-12">M</td>
+											</tr>
+											<tr class="table-num">
+												<td>13</td>
+												<td>14</td>
+												<td>15</td>
+												<td>16</td>
+												<td>17</td>
+												<td>18</td>
+												<td>19</td>
+												<td>20</td>
+												<td>21</td>
+												<td>22</td>
+												<td>23</td>
+												<td>24</td>
+												<td>25</td>
+											</tr>
+											<tr>
+												<td name="color-13">N</td>
+												<td name="color-14">O</td>
+												<td name="color-15">P</td>
+												<td name="color-16">Q</td>
+												<td name="color-17">R</td>
+												<td name="color-18">S</td>
+												<td name="color-19">T</td>
+												<td name="color-20">U</td>
+												<td name="color-21">V</td>
+												<td name="color-22">W</td>
+												<td name="color-23">X</td>
+												<td name="color-24">Y</td>
+												<td name="color-25">Z</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+
+				
+				<div id="course3" class="course">
+					<h2 class="pt-5">第三节：仿射密码</h2>
+					<div class="image main"><img src="/static/images/pic04.jpg" alt="" /></div>
+
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title">实例</h5>
+							<h6 class="card-subtitle mb-2 text-muted">体验仿射密码的仿射加密</h6>
+
+							<!-- 折叠菜单栏 -->
+							<div class="btn-collapse row pb-3">
+								<button class="btn col-sm-2 col-3" type="button" data-bs-toggle="collapse" data-bs-target="#course3Text-1">
+									算法简介
+								</button>
+								<button class="btn col-sm-2 col-3" type="button" data-bs-toggle="collapse" data-bs-target="#course3Text-2">
+									加密原理
+								</button>
+								<button class="btn col-sm-2 col-3" type="button" data-bs-toggle="collapse" data-bs-target="#course3Text-3">
+									算法公式
+								</button>
+								<button class="btn col-sm-2 col-3" type="button" data-bs-toggle="collapse" data-bs-target="#course3Text-4">
+									公式解析
+								</button>
+							</div>
+
+							<div class="collapse indent" id="course3Text-1" data-bs-parent="#course3">
+								作为更加复杂、更加难以破译的单表代换密码，仿射密码结合了前文介绍的两种密码的特点，是移位密码和乘数密码的组合。
+								把移位密码和乘法密码联合起来，就得到了所谓的仿射密码(affine cipher)—— 两种密码与一对密钥的组合。
+							</div>
+							<div class="collapse indent" id="course3Text-2" data-bs-parent="#course3">
+								仿射密码作为单表加密的一种，加密过程同样是对明文消息所处的位置进行加密。
+								例如，明文字母A，D，Y的下标分别为1，4，25，选择3为位置偏移量，5为对字母位置的加密数，
+								加密后的位置为3+1*5=8，3+4*5=23，3+25*5=128，由字母表循环类推，得到位置对应的加密字母为H，
+								W和X。仿射密码结合了凯撒密码和乘数密码的特点，是凯撒密码和乘数密码的组合。
+							</div>
+							<div class="collapse indent" id="course3Text-3" data-bs-parent="#course3">
+								<p>加密变换: C=k*P+b(mod 26) 。其中P为明文，C为密文，k与b为密钥，k为乘量，b为位移量。</p>
+								<p>解密变换: P=k<sup>-1</sup>*C- k<sup>-1</sup>*b(mod 26)。</p>
+								<p>要求：k应与26互素.</p>
+							</div>
+							<div class="collapse indent" id="course3Text-4" data-bs-parent="#course3">
+								<p>(1) x mod y是任意整数x除以任意正整数y后取余数的意思。因此，以加密变换C=k*P+b(mod 26)为例，该式子表示：对于26的模，即用k*P+b除以26，得到相应的余数，加密变换后的结果C就是余数。</p>
+								<p>(2) 每个字母的原来对应的位置即为字母在字母表中的位置，从0开始计算。比如a的位置为0,b的位置为1,以此类推,y的位置为24,z的位置为25。</p>
+								<p>(3) 对整数 x和x<sup>-1</sup>，若x≡x<sup>-1</sup>mod n，则称x和x<sup>-1</sup>关于模n互为模逆元，其中≡符号表示任意整数x和x<sup>-1</sup>除以任意正整数n后的余数相等。因此k<sup>-1</sup>在该式子中为k的模逆元，并不为倒数，注意不要混淆。</p>
+							</div>
+
+							<div class="mt-3">
+
+								<div class="input-group mt-2">
+									<div class="row" style="width: 100%;">
+										<span>明文: </span>
+										<input class="form-control col-12 mb-3 pt-3 pb-3" name="plaintext" placeholder="输入英文字母" type="text">
+										<span>明文序号: </span>
+										<input class="form-control col-12 mb-3 pt-3 pb-3" name="plaintextNumList" readonly="readonly" type="text">
+										<span>密文序号: </span>
+										<input class="form-control col-12 mb-3 pt-3 pb-3" name="ciphertextNumList" readonly="readonly" type="text">
+										<span>密文: </span>
+										<input class="form-control col-12 mb-3 pt-3 pb-3" name="ciphertext" readonly="readonly" type="text">
+
+										<button name="example" class="btn col-6 col-sm-3" type="button">生成例句</button>
+										<button name="parameter" class="btn col-6 col-sm-3" type="button" data-bs-toggle="collapse" data-bs-target="#course3-parameter">参数设置</button>
+										<button name="animation" class="btn col-6 col-sm-3" type="button" data-bs-toggle="collapse" data-bs-target="#course3-animation">动画演示</button>
+										<button name="encryption" class="btn col-6 col-sm-3" type="button">模拟加密</button>
+									</div>
+									<div class="collapse show text-center w-100" id="course3-parameter">
+										<div class="card p-4 m-auto mt-3 w-50">
+											<span class="text-danger verification" name="verification">请输入正确的参数!</span>
+											<div class="input-group">
+												<span class="input-group-text">乘量 k:</span>
+												<input class="form-control" name="parameter-k" placeholder="输入一个整数" type="number">
+											</div>
+											<div class="input-group">
+												<span class="input-group-text">位移量 b:</span>
+												<input class="form-control" name="parameter-b" placeholder="输入一个整数" type="number">
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="collapse show" id="course3-animation">
+									<table class="table table-bordered mt-4 mb-3">
+										<tbody class="text-center">
+											<tr class="table-num">
+												<td>0</td>
+												<td>1</td>
+												<td>2</td>
+												<td>3</td>
+												<td>4</td>
+												<td>5</td>
+												<td>6</td>
+												<td>7</td>
+												<td>8</td>
+												<td>9</td>
+												<td>10</td>
+												<td>11</td>
+												<td>12</td>
+											</tr>
+											<tr>
+												<td name="color-0">A</td>
+												<td name="color-1">B</td>
+												<td name="color-2">C</td>
+												<td name="color-3">D</td>
+												<td name="color-4">E</td>
+												<td name="color-5">F</td>
+												<td name="color-6">G</td>
+												<td name="color-7">H</td>
+												<td name="color-8">I</td>
+												<td name="color-9">J</td>
+												<td name="color-10">K</td>
+												<td name="color-11">L</td>
+												<td name="color-12">M</td>
+											</tr>
+											<tr class="table-num">
+												<td>13</td>
+												<td>14</td>
+												<td>15</td>
+												<td>16</td>
+												<td>17</td>
+												<td>18</td>
+												<td>19</td>
+												<td>20</td>
+												<td>21</td>
+												<td>22</td>
+												<td>23</td>
+												<td>24</td>
+												<td>25</td>
+											</tr>
+											<tr>
+												<td name="color-13">N</td>
+												<td name="color-14">O</td>
+												<td name="color-15">P</td>
+												<td name="color-16">Q</td>
+												<td name="color-17">R</td>
+												<td name="color-18">S</td>
+												<td name="color-19">T</td>
+												<td name="color-20">U</td>
+												<td name="color-21">V</td>
+												<td name="color-22">W</td>
+												<td name="color-23">X</td>
+												<td name="color-24">Y</td>
+												<td name="color-25">Z</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+
+				
+				<div id="course4" class="course">
+					<h2 class="pt-5">第四节：密钥短语密码</h2>
+					<div class="image main"><img src="/static/images/pic05.jpg" alt="" /></div>
+					<p class="indent">
+					</p>
+
+
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title">实例</h5>
+							<h6 class="card-subtitle mb-2 text-muted">体验密钥短语密码的字母代换加密</h6>
+
+							<!-- 折叠菜单栏 -->
+							<div class="btn-collapse row pb-3">
+								<button class="btn col-sm-2 col-3" type="button" data-bs-toggle="collapse" data-bs-target="#course4Text-1">
+									算法简介
+								</button>
+								<button class="btn col-sm-2 col-3" type="button" data-bs-toggle="collapse" data-bs-target="#course4Text-2">
+									加密原理
+								</button>
+								<button class="btn col-sm-2 col-3" type="button" data-bs-toggle="collapse" data-bs-target="#course4Text-3">
+									算法公式
+								</button>
+								<button class="btn col-sm-2 col-3" type="button" data-bs-toggle="collapse" data-bs-target="#course4Text-4">
+									公式解析
+								</button>
+							</div>
+
+							<div class="collapse indent" id="course4Text-1" data-bs-parent="#course4">
+								密钥短语密码是一种易于记忆而又有多种可能选择的密码。用不同的密钥字就可得到不同的代换表，其中绝大多数代换都是好的。
+								是一种灵活变化密钥的代换密码。选一个英文短语，称其为密钥字(Key Word)或密钥短语(Key Phrase)，将它依次写在明文字母表之下，
+								而后经过固定规则的变换，就可构造出一个字母代换表。
+							</div>
+							<div class="collapse indent" id="course4Text-2" data-bs-parent="#course4">
+								<p>首先随机选择一个密钥字happynewyear，去除重复字母后变为hapynewr，将其先填在明文字母表下，接着查找没有在'hapynewr'中出现的字母，依次填在'hapynewr'的后方，即可构成如下字母代换表，即为密钥.</p>
+								<p>明文字母表：a b c d e f g h i j k l m n o p q r s t u v w x y z</p>
+								<p>字母代换表：h a p y n e w r b c d f g i j k l m o q s t u v k z</p>
+								<p>当选择上面的密钥进行加密时，明文在字母代换表中使用与其位置相同的字母进行替换，替换的结果即为该明文字母的密文。例如，明文为'china',则通过相同位置的字母替换，得到密文为'prbih'.</p>
+							</div>
+							<div class="collapse indent" id="course4Text-3" data-bs-parent="#course4">
+								<p>1.随机选择一个英文短语作为密钥字，并去除重复字母。</p>
+								<p>2.在顺序明文字母表下方先填入密钥短语，接着在字母表中查找没有在密钥短语中出现过的字母，依次填在密钥字后面，直至长度为26，构成字母代换表。</p>
+								<p>3.用不同的密钥字就可得到不同的代换表。q=26时将可能有26!≈4×1026种.</p>
+							</div>
+							<div class="collapse indent" id="course4Text-4" data-bs-parent="#course4">
+								<p>字母代换表：去重的密钥字与密钥字中没有重复字母的补充字母构成的，即为密钥。</p>
+							</div>
+
+							<div class="mt-3">
+								<div class="input-group mt-2">
+									<div class="row" style="width: 100%;">
+										<span>明文: </span>
+										<input class="form-control col-12 mb-3 pt-3 pb-3" name="plaintext" placeholder="输入英文字母" type="text">
+										<span>密钥: </span>
+										<input class="form-control col-12 mb-3 pt-3 pb-3" name="key" placeholder="输入英文字母" type="text">
+										<span>密文: </span>
+										<input class="form-control col-12 mb-3 pt-3 pb-3" name="ciphertext" readonly="readonly" type="text">
+
+										<button name="example" class="btn col-6 col-sm-3" type="button">生成例句</button>
+										<button name="animation" class="btn col-6 col-sm-3" type="button" data-bs-toggle="collapse" data-bs-target="#course4-animation">动画演示</button>
+										<button name="reduction" class="btn col-6 col-sm-3" type="button">还原</button>
+										<button name="encryption" class="btn col-6 col-sm-3" type="button">模拟加密</button>
+									</div>
+								</div>
+								<div class="collapse show" id="course4-animation">
+									<table class="table table-bordered mt-4 mb-3">
+										<tbody class="text-center">
+											<tr name="plainTd">
+												<td name="color-0">A</td>
+												<td name="color-1">B</td>
+												<td name="color-2">C</td>
+												<td name="color-3">D</td>
+												<td name="color-4">E</td>
+												<td name="color-5">F</td>
+												<td name="color-6">G</td>
+												<td name="color-7">H</td>
+												<td name="color-8">I</td>
+												<td name="color-9">J</td>
+												<td name="color-10">K</td>
+												<td name="color-11">L</td>
+												<td name="color-12">M</td>
+												<td name="color-13">N</td>
+												<td name="color-14">O</td>
+												<td name="color-15">P</td>
+												<td name="color-16">Q</td>
+												<td name="color-17">R</td>
+												<td name="color-18">S</td>
+												<td name="color-19">T</td>
+												<td name="color-20">U</td>
+												<td name="color-21">V</td>
+												<td name="color-22">W</td>
+												<td name="color-23">X</td>
+												<td name="color-24">Y</td>
+												<td name="color-25">Z</td>
+											</tr>
+											<tr name="cipherTd">
+												<td name="color-0">A</td>
+												<td name="color-1">B</td>
+												<td name="color-2">C</td>
+												<td name="color-3">D</td>
+												<td name="color-4">E</td>
+												<td name="color-5">F</td>
+												<td name="color-6">G</td>
+												<td name="color-7">H</td>
+												<td name="color-8">I</td>
+												<td name="color-9">J</td>
+												<td name="color-10">K</td>
+												<td name="color-11">L</td>
+												<td name="color-12">M</td>
+												<td name="color-13">N</td>
+												<td name="color-14">O</td>
+												<td name="color-15">P</td>
+												<td name="color-16">Q</td>
+												<td name="color-17">R</td>
+												<td name="color-18">S</td>
+												<td name="color-19">T</td>
+												<td name="color-20">U</td>
+												<td name="color-21">V</td>
+												<td name="color-22">W</td>
+												<td name="color-23">X</td>
+												<td name="color-24">Y</td>
+												<td name="color-25">Z</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+
+				
+				<div id="course5" class="course">
+					<h2 class="pt-5">第五节：维吉尼亚密码</h2>
+					<div class="text-center pb-4 image main">
+						<img class="" src="/static/images/pic06.jpg" alt="" />
+					</div>
+
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title">实例</h5>
+							<h6 class="card-subtitle mb-2 text-muted">体验维吉尼亚密码的字母表加密</h6>
+
+							<!-- 折叠菜单栏 -->
+							<div class="btn-collapse row pb-3">
+								<button class="btn col-sm-2 col-3" type="button" data-bs-toggle="collapse" data-bs-target="#course5Text-1">
+									算法简介
+								</button>
+								<button class="btn col-sm-2 col-3" type="button" data-bs-toggle="collapse" data-bs-target="#course5Text-2">
+									加密原理
+								</button>
+								<button class="btn col-sm-2 col-3" type="button" data-bs-toggle="collapse" data-bs-target="#course5Text-3">
+									算法公式
+								</button>
+								<button class="btn col-sm-2 col-3" type="button" data-bs-toggle="collapse" data-bs-target="#course5Text-4">
+									公式解析
+								</button>
+							</div>
+
+							<div class="collapse indent" id="course5Text-1" data-bs-parent="#course5">
+								维吉尼亚密码（又译维热纳尔密码）是使用一系列凯撒密码组成密码字母表的加密算法，
+								属于多表密码的一种简单形式。 维吉尼亚密码以其简单易用而著称，同时初学者通常难以破解，
+								因而又被称为“不可破译的密码”。 这也让很多人使用维吉尼亚密码来加密的目的就是为了将其破解。
+							</div>
+							<div class="collapse indent" id="course5Text-2" data-bs-parent="#course5">
+								在凯撒密码中，每个字母都会进行一定偏移值转换，例如，当偏移量是3的时候，所有的字母A将被替换成D，B变成E等。
+								维吉尼亚密码则是由具有不同偏移量的凯撒密码构成的，它将凯撒密码的所有26种排列放到一个表中，每一行从上一行到左行被一位偏移，形成26行26列的加密字母表。
+								维吉尼亚密码的密钥为一串字母，密钥中字母的个数与明文中字母的个数相同。加密过程为逐个明文字母加密，
+								在明文中处于位置i(i=1~26)的字母就用密钥中处于位置i(i=1~26)的字母来加密。
+								在表格中，明文每个字母所在列和处于相同位置的密钥字母所在行相交，交点即为明文中某个字母的密文，最后将密文逐个输出。
+							</div>
+							<div class="collapse indent" id="course5Text-3" data-bs-parent="#course5">
+								<p>加密变换: C=(t+k)mod 26,0≤t&lt;26,0≤k&lt;26。其中t为字母原来对应的位置，k为密钥即偏移量.</p>
+								<p>解密变换: P=(t-k)mod 26,0≤t&lt;26,0≤k&lt;26。</p>
+							</div>
+							<div class="collapse indent" id="course5Text-4" data-bs-parent="#course5">
+								<p>(1) x mod y是任意整数x 除以任意正整数y后取余数。因此，以加密变换c[i]≡(p[i]+k[i])mod 26为例，该式子表示：对于26的模，即用(p[i]+k[i])来除以26，得到相应的余数，加密变换后的结果c[i]就是余数。</p>
+								<p>(2) x≡zmod n中的≡符号表示任意整数x和z除以任意正整数n后的余数相等。</p>
+								<p>(3) 每个字母的位置即为字母在字母表中的位置，从0开始计算。比如a的位置为0，b的位置为1，以此类推，y的位置为24，z的位置为25。</p>
+							</div>
+
+							<div class="mt-3">
+
+								<div class="input-group mt-2">
+									<div class="row" style="width: 100%;">
+										<span>明文: </span>
+										<input class="form-control col-12 mb-3 pt-3 pb-3" name="plaintext" placeholder="输入英文字母" type="text">
+										<span>密钥: <span class="text-danger verification" id="course5-keyWarning">(字母个数必须与明文相同!)</span></span>
+										<input class="form-control col-12 mb-3 pt-3 pb-3" name="key" placeholder="输入英文字母, 需与明文字母个数相同" type="text">
+										<span>密文: </span>
+										<input class="form-control col-12 mb-3 pt-3 pb-3" name="ciphertext" readonly="readonly" type="text">
+
+										<button name="example" class="btn col-4 col-sm-4" type="button">生成例句</button>
+										<button name="animation" class="btn col-4 col-sm-4" type="button" data-bs-toggle="collapse" data-bs-target="#course5-animation">动画演示</button>
+										<button name="encryption" class="btn col-4 col-sm-4" type="button">模拟加密</button>
+									</div>
+								</div>
+								<div class="collapse show" id="course5-animation">
+									<table class="table table-bordered mt-4 mb-3 mx-auto">
+										<tbody class="text-center">
+											<tr>
+												<td></td>
+												<td>a</td>
+												<td>b</td>
+												<td>c</td>
+												<td>d</td>
+												<td>e</td>
+												<td>f</td>
+												<td>g</td>
+												<td>h</td>
+												<td>i</td>
+												<td>j</td>
+												<td>k</td>
+												<td>l</td>
+												<td>m</td>
+												<td>n</td>
+												<td>o</td>
+												<td>p</td>
+												<td>q</td>
+												<td>r</td>
+												<td>s</td>
+												<td>t</td>
+												<td>u</td>
+												<td>v</td>
+												<td>w</td>
+												<td>x</td>
+												<td>y</td>
+												<td>z</td>
+											</tr>
+											<tr>
+												<td>a</td>
+												<td>A</td>
+												<td>B</td>
+												<td>C</td>
+												<td>D</td>
+												<td>E</td>
+												<td>F</td>
+												<td>G</td>
+												<td>H</td>
+												<td>I</td>
+												<td>J</td>
+												<td>K</td>
+												<td>L</td>
+												<td>M</td>
+												<td>N</td>
+												<td>O</td>
+												<td>P</td>
+												<td>Q</td>
+												<td>R</td>
+												<td>S</td>
+												<td>T</td>
+												<td>U</td>
+												<td>V</td>
+												<td>W</td>
+												<td>X</td>
+												<td>Y</td>
+												<td>Z</td>
+											</tr>
+											<tr>
+												<td>b</td>
+												<td>B</td>
+												<td>C</td>
+												<td>D</td>
+												<td>E</td>
+												<td>F</td>
+												<td>G</td>
+												<td>H</td>
+												<td>I</td>
+												<td>J</td>
+												<td>K</td>
+												<td>L</td>
+												<td>M</td>
+												<td>N</td>
+												<td>O</td>
+												<td>P</td>
+												<td>Q</td>
+												<td>R</td>
+												<td>S</td>
+												<td>T</td>
+												<td>U</td>
+												<td>V</td>
+												<td>W</td>
+												<td>X</td>
+												<td>Y</td>
+												<td>Z</td>
+												<td>A</td>
+											</tr>
+											<tr>
+												<td>c</td>
+												<td>C</td>
+												<td>D</td>
+												<td>E</td>
+												<td>F</td>
+												<td>G</td>
+												<td>H</td>
+												<td>I</td>
+												<td>J</td>
+												<td>K</td>
+												<td>L</td>
+												<td>M</td>
+												<td>N</td>
+												<td>O</td>
+												<td>P</td>
+												<td>Q</td>
+												<td>R</td>
+												<td>S</td>
+												<td>T</td>
+												<td>U</td>
+												<td>V</td>
+												<td>W</td>
+												<td>X</td>
+												<td>Y</td>
+												<td>Z</td>
+												<td>A</td>
+												<td>B</td>
+											</tr>
+											<tr>
+												<td>d</td>
+												<td>D</td>
+												<td>E</td>
+												<td>F</td>
+												<td>G</td>
+												<td>H</td>
+												<td>I</td>
+												<td>J</td>
+												<td>K</td>
+												<td>L</td>
+												<td>M</td>
+												<td>N</td>
+												<td>O</td>
+												<td>P</td>
+												<td>Q</td>
+												<td>R</td>
+												<td>S</td>
+												<td>T</td>
+												<td>U</td>
+												<td>V</td>
+												<td>W</td>
+												<td>X</td>
+												<td>Y</td>
+												<td>Z</td>
+												<td>A</td>
+												<td>B</td>
+												<td>C</td>
+											</tr>
+											<tr>
+												<td>e</td>
+												<td>E</td>
+												<td>F</td>
+												<td>G</td>
+												<td>H</td>
+												<td>I</td>
+												<td>J</td>
+												<td>K</td>
+												<td>L</td>
+												<td>M</td>
+												<td>N</td>
+												<td>O</td>
+												<td>P</td>
+												<td>Q</td>
+												<td>R</td>
+												<td>S</td>
+												<td>T</td>
+												<td>U</td>
+												<td>V</td>
+												<td>W</td>
+												<td>X</td>
+												<td>Y</td>
+												<td>Z</td>
+												<td>A</td>
+												<td>B</td>
+												<td>C</td>
+												<td>D</td>
+											</tr>
+											<tr>
+												<td>f</td>
+												<td>F</td>
+												<td>G</td>
+												<td>H</td>
+												<td>I</td>
+												<td>J</td>
+												<td>K</td>
+												<td>L</td>
+												<td>M</td>
+												<td>N</td>
+												<td>O</td>
+												<td>P</td>
+												<td>Q</td>
+												<td>R</td>
+												<td>S</td>
+												<td>T</td>
+												<td>U</td>
+												<td>V</td>
+												<td>W</td>
+												<td>X</td>
+												<td>Y</td>
+												<td>Z</td>
+												<td>A</td>
+												<td>B</td>
+												<td>C</td>
+												<td>D</td>
+												<td>E</td>
+											</tr>
+											<tr>
+												<td>g</td>
+												<td>G</td>
+												<td>H</td>
+												<td>I</td>
+												<td>J</td>
+												<td>K</td>
+												<td>L</td>
+												<td>M</td>
+												<td>N</td>
+												<td>O</td>
+												<td>P</td>
+												<td>Q</td>
+												<td>R</td>
+												<td>S</td>
+												<td>T</td>
+												<td>U</td>
+												<td>V</td>
+												<td>W</td>
+												<td>X</td>
+												<td>Y</td>
+												<td>Z</td>
+												<td>A</td>
+												<td>B</td>
+												<td>C</td>
+												<td>D</td>
+												<td>E</td>
+												<td>F</td>
+											</tr>
+											<tr>
+												<td>h</td>
+												<td>H</td>
+												<td>I</td>
+												<td>J</td>
+												<td>K</td>
+												<td>L</td>
+												<td>M</td>
+												<td>N</td>
+												<td>O</td>
+												<td>P</td>
+												<td>Q</td>
+												<td>R</td>
+												<td>S</td>
+												<td>T</td>
+												<td>U</td>
+												<td>V</td>
+												<td>W</td>
+												<td>X</td>
+												<td>Y</td>
+												<td>Z</td>
+												<td>A</td>
+												<td>B</td>
+												<td>C</td>
+												<td>D</td>
+												<td>E</td>
+												<td>F</td>
+												<td>G</td>
+											</tr>
+											<tr>
+												<td>i</td>
+												<td>I</td>
+												<td>J</td>
+												<td>K</td>
+												<td>L</td>
+												<td>M</td>
+												<td>N</td>
+												<td>O</td>
+												<td>P</td>
+												<td>Q</td>
+												<td>R</td>
+												<td>S</td>
+												<td>T</td>
+												<td>U</td>
+												<td>V</td>
+												<td>W</td>
+												<td>X</td>
+												<td>Y</td>
+												<td>Z</td>
+												<td>A</td>
+												<td>B</td>
+												<td>C</td>
+												<td>D</td>
+												<td>E</td>
+												<td>F</td>
+												<td>G</td>
+												<td>H</td>
+											</tr>
+											<tr>
+												<td>j</td>
+												<td>J</td>
+												<td>K</td>
+												<td>L</td>
+												<td>M</td>
+												<td>N</td>
+												<td>O</td>
+												<td>P</td>
+												<td>Q</td>
+												<td>R</td>
+												<td>S</td>
+												<td>T</td>
+												<td>U</td>
+												<td>V</td>
+												<td>W</td>
+												<td>X</td>
+												<td>Y</td>
+												<td>Z</td>
+												<td>A</td>
+												<td>B</td>
+												<td>C</td>
+												<td>D</td>
+												<td>E</td>
+												<td>F</td>
+												<td>G</td>
+												<td>H</td>
+												<td>I</td>
+											</tr>
+											<tr>
+												<td>k</td>
+												<td>K</td>
+												<td>L</td>
+												<td>M</td>
+												<td>N</td>
+												<td>O</td>
+												<td>P</td>
+												<td>Q</td>
+												<td>R</td>
+												<td>S</td>
+												<td>T</td>
+												<td>U</td>
+												<td>V</td>
+												<td>W</td>
+												<td>X</td>
+												<td>Y</td>
+												<td>Z</td>
+												<td>A</td>
+												<td>B</td>
+												<td>C</td>
+												<td>D</td>
+												<td>E</td>
+												<td>F</td>
+												<td>G</td>
+												<td>H</td>
+												<td>I</td>
+												<td>J</td>
+											</tr>
+											<tr>
+												<td>l</td>
+												<td>L</td>
+												<td>M</td>
+												<td>N</td>
+												<td>O</td>
+												<td>P</td>
+												<td>Q</td>
+												<td>R</td>
+												<td>S</td>
+												<td>T</td>
+												<td>U</td>
+												<td>V</td>
+												<td>W</td>
+												<td>X</td>
+												<td>Y</td>
+												<td>Z</td>
+												<td>A</td>
+												<td>B</td>
+												<td>C</td>
+												<td>D</td>
+												<td>E</td>
+												<td>F</td>
+												<td>G</td>
+												<td>H</td>
+												<td>I</td>
+												<td>J</td>
+												<td>K</td>
+											</tr>
+											<tr>
+												<td>m</td>
+												<td>M</td>
+												<td>N</td>
+												<td>O</td>
+												<td>P</td>
+												<td>Q</td>
+												<td>R</td>
+												<td>S</td>
+												<td>T</td>
+												<td>U</td>
+												<td>V</td>
+												<td>W</td>
+												<td>X</td>
+												<td>Y</td>
+												<td>Z</td>
+												<td>A</td>
+												<td>B</td>
+												<td>C</td>
+												<td>D</td>
+												<td>E</td>
+												<td>F</td>
+												<td>G</td>
+												<td>H</td>
+												<td>I</td>
+												<td>J</td>
+												<td>K</td>
+												<td>L</td>
+											</tr>
+											<tr>
+												<td>n</td>
+												<td>N</td>
+												<td>O</td>
+												<td>P</td>
+												<td>Q</td>
+												<td>R</td>
+												<td>S</td>
+												<td>T</td>
+												<td>U</td>
+												<td>V</td>
+												<td>W</td>
+												<td>X</td>
+												<td>Y</td>
+												<td>Z</td>
+												<td>A</td>
+												<td>B</td>
+												<td>C</td>
+												<td>D</td>
+												<td>E</td>
+												<td>F</td>
+												<td>G</td>
+												<td>H</td>
+												<td>I</td>
+												<td>J</td>
+												<td>K</td>
+												<td>L</td>
+												<td>M</td>
+											</tr>
+											<tr>
+												<td>o</td>
+												<td>O</td>
+												<td>P</td>
+												<td>Q</td>
+												<td>R</td>
+												<td>S</td>
+												<td>T</td>
+												<td>U</td>
+												<td>V</td>
+												<td>W</td>
+												<td>X</td>
+												<td>Y</td>
+												<td>Z</td>
+												<td>A</td>
+												<td>B</td>
+												<td>C</td>
+												<td>D</td>
+												<td>E</td>
+												<td>F</td>
+												<td>G</td>
+												<td>H</td>
+												<td>I</td>
+												<td>J</td>
+												<td>K</td>
+												<td>L</td>
+												<td>M</td>
+												<td>N</td>
+											</tr>
+											<tr>
+												<td>p</td>
+												<td>P</td>
+												<td>Q</td>
+												<td>R</td>
+												<td>S</td>
+												<td>T</td>
+												<td>U</td>
+												<td>V</td>
+												<td>W</td>
+												<td>X</td>
+												<td>Y</td>
+												<td>Z</td>
+												<td>A</td>
+												<td>B</td>
+												<td>C</td>
+												<td>D</td>
+												<td>E</td>
+												<td>F</td>
+												<td>G</td>
+												<td>H</td>
+												<td>I</td>
+												<td>J</td>
+												<td>K</td>
+												<td>L</td>
+												<td>M</td>
+												<td>N</td>
+												<td>O</td>
+											</tr>
+											<tr>
+												<td>q</td>
+												<td>Q</td>
+												<td>R</td>
+												<td>S</td>
+												<td>T</td>
+												<td>U</td>
+												<td>V</td>
+												<td>W</td>
+												<td>X</td>
+												<td>Y</td>
+												<td>Z</td>
+												<td>A</td>
+												<td>B</td>
+												<td>C</td>
+												<td>D</td>
+												<td>E</td>
+												<td>F</td>
+												<td>G</td>
+												<td>H</td>
+												<td>I</td>
+												<td>J</td>
+												<td>K</td>
+												<td>L</td>
+												<td>M</td>
+												<td>N</td>
+												<td>O</td>
+												<td>P</td>
+											</tr>
+											<tr>
+												<td>r</td>
+												<td>R</td>
+												<td>S</td>
+												<td>T</td>
+												<td>U</td>
+												<td>V</td>
+												<td>W</td>
+												<td>X</td>
+												<td>Y</td>
+												<td>Z</td>
+												<td>A</td>
+												<td>B</td>
+												<td>C</td>
+												<td>D</td>
+												<td>E</td>
+												<td>F</td>
+												<td>G</td>
+												<td>H</td>
+												<td>I</td>
+												<td>J</td>
+												<td>K</td>
+												<td>L</td>
+												<td>M</td>
+												<td>N</td>
+												<td>O</td>
+												<td>P</td>
+												<td>Q</td>
+											</tr>
+											<tr>
+												<td>s</td>
+												<td>S</td>
+												<td>T</td>
+												<td>U</td>
+												<td>V</td>
+												<td>W</td>
+												<td>X</td>
+												<td>Y</td>
+												<td>Z</td>
+												<td>A</td>
+												<td>B</td>
+												<td>C</td>
+												<td>D</td>
+												<td>E</td>
+												<td>F</td>
+												<td>G</td>
+												<td>H</td>
+												<td>I</td>
+												<td>J</td>
+												<td>K</td>
+												<td>L</td>
+												<td>M</td>
+												<td>N</td>
+												<td>O</td>
+												<td>P</td>
+												<td>Q</td>
+												<td>R</td>
+											</tr>
+											<tr>
+												<td>t</td>
+												<td>T</td>
+												<td>U</td>
+												<td>V</td>
+												<td>W</td>
+												<td>X</td>
+												<td>Y</td>
+												<td>Z</td>
+												<td>A</td>
+												<td>B</td>
+												<td>C</td>
+												<td>D</td>
+												<td>E</td>
+												<td>F</td>
+												<td>G</td>
+												<td>H</td>
+												<td>I</td>
+												<td>J</td>
+												<td>K</td>
+												<td>L</td>
+												<td>M</td>
+												<td>N</td>
+												<td>O</td>
+												<td>P</td>
+												<td>Q</td>
+												<td>R</td>
+												<td>S</td>
+											</tr>
+											<tr>
+												<td>u</td>
+												<td>U</td>
+												<td>V</td>
+												<td>W</td>
+												<td>X</td>
+												<td>Y</td>
+												<td>Z</td>
+												<td>A</td>
+												<td>B</td>
+												<td>C</td>
+												<td>D</td>
+												<td>E</td>
+												<td>F</td>
+												<td>G</td>
+												<td>H</td>
+												<td>I</td>
+												<td>J</td>
+												<td>K</td>
+												<td>L</td>
+												<td>M</td>
+												<td>N</td>
+												<td>O</td>
+												<td>P</td>
+												<td>Q</td>
+												<td>R</td>
+												<td>S</td>
+												<td>T</td>
+											</tr>
+											<tr>
+												<td>v</td>
+												<td>V</td>
+												<td>W</td>
+												<td>X</td>
+												<td>Y</td>
+												<td>Z</td>
+												<td>A</td>
+												<td>B</td>
+												<td>C</td>
+												<td>D</td>
+												<td>E</td>
+												<td>F</td>
+												<td>G</td>
+												<td>H</td>
+												<td>I</td>
+												<td>J</td>
+												<td>K</td>
+												<td>L</td>
+												<td>M</td>
+												<td>N</td>
+												<td>O</td>
+												<td>P</td>
+												<td>Q</td>
+												<td>R</td>
+												<td>S</td>
+												<td>T</td>
+												<td>U</td>
+											</tr>
+											<tr>
+												<td>w</td>
+												<td>W</td>
+												<td>X</td>
+												<td>Y</td>
+												<td>Z</td>
+												<td>A</td>
+												<td>B</td>
+												<td>C</td>
+												<td>D</td>
+												<td>E</td>
+												<td>F</td>
+												<td>G</td>
+												<td>H</td>
+												<td>I</td>
+												<td>J</td>
+												<td>K</td>
+												<td>L</td>
+												<td>M</td>
+												<td>N</td>
+												<td>O</td>
+												<td>P</td>
+												<td>Q</td>
+												<td>R</td>
+												<td>S</td>
+												<td>T</td>
+												<td>U</td>
+												<td>V</td>
+											</tr>
+											<tr>
+												<td>x</td>
+												<td>X</td>
+												<td>Y</td>
+												<td>Z</td>
+												<td>A</td>
+												<td>B</td>
+												<td>C</td>
+												<td>D</td>
+												<td>E</td>
+												<td>F</td>
+												<td>G</td>
+												<td>H</td>
+												<td>I</td>
+												<td>J</td>
+												<td>K</td>
+												<td>L</td>
+												<td>M</td>
+												<td>N</td>
+												<td>O</td>
+												<td>P</td>
+												<td>Q</td>
+												<td>R</td>
+												<td>S</td>
+												<td>T</td>
+												<td>U</td>
+												<td>V</td>
+												<td>W</td>
+											</tr>
+											<tr>
+												<td>y</td>
+												<td>Y</td>
+												<td>Z</td>
+												<td>A</td>
+												<td>B</td>
+												<td>C</td>
+												<td>D</td>
+												<td>E</td>
+												<td>F</td>
+												<td>G</td>
+												<td>H</td>
+												<td>I</td>
+												<td>J</td>
+												<td>K</td>
+												<td>L</td>
+												<td>M</td>
+												<td>N</td>
+												<td>O</td>
+												<td>P</td>
+												<td>Q</td>
+												<td>R</td>
+												<td>S</td>
+												<td>T</td>
+												<td>U</td>
+												<td>V</td>
+												<td>W</td>
+												<td>X</td>
+											</tr>
+											<tr>
+												<td>z</td>
+												<td>Z</td>
+												<td>A</td>
+												<td>B</td>
+												<td>C</td>
+												<td>D</td>
+												<td>E</td>
+												<td>F</td>
+												<td>G</td>
+												<td>H</td>
+												<td>I</td>
+												<td>J</td>
+												<td>K</td>
+												<td>L</td>
+												<td>M</td>
+												<td>N</td>
+												<td>O</td>
+												<td>P</td>
+												<td>Q</td>
+												<td>R</td>
+												<td>S</td>
+												<td>T</td>
+												<td>U</td>
+												<td>V</td>
+												<td>W</td>
+												<td>X</td>
+												<td>Y</td>
+											</tr>
+
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+
+				
+				<div id="course6" class="course">
+					<h2 class="pt-5">第六节：RSA算法</h2>
+					<div class="text-center pb-4 image main">
+						<img class="" src="/static/images/pic07.jpg" alt="" />
+					</div>
+
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title">实例</h5>
+							<h6 class="card-subtitle mb-2 text-muted">了解公钥密码体质中的RSA算法</h6>
+
+							<!-- 折叠菜单栏 -->
+							<div class="btn-collapse row pb-3">
+								<button class="btn col-sm-2 col-3" type="button" data-bs-toggle="collapse" data-bs-target="#course6Text-1">
+									算法简介
+								</button>
+								<button class="btn col-sm-2 col-3" type="button" data-bs-toggle="collapse" data-bs-target="#course6Text-2">
+									加密原理
+								</button>
+								<button class="btn col-sm-2 col-3" type="button" data-bs-toggle="collapse" data-bs-target="#course6Text-3">
+									算法公式
+								</button>
+								<button class="btn col-sm-2 col-3" type="button" data-bs-toggle="collapse" data-bs-target="#course6Text-4">
+									公式解析
+								</button>
+							</div>
+
+							<div class="collapse indent" id="course6Text-1" data-bs-parent="#course6">
+								RSA是由罗纳德·李维斯特（Ron Rivest）、阿迪·萨莫尔（Adi Shamir）和伦纳德·阿德曼（Leonard Adleman）
+								在1977年一起提出的，RSA就是他们三人姓氏开头字母拼在一起组成的。
+								这套算法是目前应用最广泛的非对称公钥密码体制之一，其不仅广泛应用于信息加密传输， 同时也广泛应用于数字签名。
+							</div>
+							<div class="collapse indent" id="course6Text-2" data-bs-parent="#course6">
+								<p>
+									拿出要加密的信息M，这里M是一个整数。随机选取两个大素数p和q相乘得到n，
+									接下来范围内随机选择一个公钥e和私钥d，e为小于φ (n)且与φ (n)互素的数；d由公式d·e ≡ 1mod φ (n)得到，
+									来作为M的指数。接下来，进行M的d次方运算，然后对选取的两个大素数p和q的乘积n进行取模运算，
+									最后得到的结果就是密文，用C表示。
+								</p>
+								<p>
+									举例: 设M等于2，随机选取两个素数3和11，n则为33，φ (n)为20，e选择一个与φ (n)互素的数3，
+									再由d·e ≡ 1mod φ (n)计算得私钥d为7，最后的密文C就等于27对33取模，结果是29。也就是说2经过加密，
+									最后密文是29。若要解密，明文M就需要使用公钥，等于293对33取模，最后求得明文为2。这个运算有个特点，
+									给定M和e以及n的值，很容易算出C，但是给定C和e以及n很难算出M来。
+								</p>
+							</div>
+							<div class="collapse indent" id="course6Text-3" data-bs-parent="#course6">
+								<p>加密消息: C=M<sup>d</sup> mod n</p>
+								<p>解密密文: M=C<sup>e</sup> mod n</p>
+								<p>其中 C 表示加密后的密文，M为加密前的明文。</p>
+							</div>
+							<div class="collapse indent" id="course6Text-4" data-bs-parent="#course6">
+								<p>（1）欧拉函数φ(n)的值是小于或等于n的正整数中与n互质的数的数目</p>
+								<p>（2）x mod y是任意整数x除以任意正整数y后取余数的意思。因此，以加密消息C=M<sup>e</sup> mod n 为例，该式子表示：对于n的模，即用n来除以M<sup>d</sup> ，得到相应的余数，公钥e加密后的信息C就是余数。</p>
+								<p>（3）互素的意思是两个数字的最大公约数为1</p>
+							</div>
+
+
+							<div class="mt-3">
+								<div class="input-group mt-2">
+									<div class="row" style="width: 100%;">
+										<span>明文: <span class="text-danger" name="plaintextWarning"></span></span>
+										<input class="form-control col-12 mb-3 pt-3 pb-3" name="plaintext" placeholder="输入比n小的数字，n由参数设置获取" type="number">
+										<span>加密钥(私钥d): <span class="text-danger verification" name="keyWarning-d">(请先从参数设置获取私钥d!)</span></span>
+										<input class="form-control col-12 mb-3 pt-3 pb-3" name="key-d" placeholder="由参数设置获取" type="text">
+										<span>密文: <span class="text-danger" name="ciphertextWarning"></span><span class="text-info verification" name="info-ciphertext">(尝试在此处修改, 以模拟信息篡改)</span></span>
+										<input class="form-control col-12 mb-3 pt-3 pb-3" name="ciphertext" readonly="readonly" placeholder="加密后的密文" type="number">
+										<span>解密钥(公钥e): <span class="text-danger verification" name="keyWarning-e">(请先从参数设置获取公钥e!)</span></span>
+										<input class="form-control col-12 mb-3 pt-3 pb-3" name="key-e" placeholder="由参数设置获取" type="text">
+										<span>明文: </span>
+										<input class="form-control col-12 mb-3 pt-3 pb-3" name="plaintext2" readonly="readonly" placeholder="解密后明文" type="number">
+
+										<button name="example" class="btn col-6 col-sm-1-5" type="button">生成例句</button>
+										<button name="parameter" class="btn col-6 col-sm-1-5" type="button" data-bs-toggle="collapse" data-bs-target="#course6-pre-parameter">参数设置</button>
+										<button name="reduction" class="btn col-4 col-sm-1-5" type="button">还原</button>
+										<button name="encryption" class="btn col-4 col-sm-1-5" type="button">模拟加密</button>
+										<button name="decryption" class="btn col-4 col-sm-1-5" type="button">模拟解密</button>
+									</div>
+									<div class="collapse show text-center w-100" id="course6-pre-parameter">
+										<div class="card p-4 m-auto mt-3 w-75">
+											<span class="text-danger verification" name="verification-pq-1">参数过大！</span>
+											<span class="text-danger verification" name="verification-pq-2">请输入两个不相同素数！</span>
+											<span class="text-danger verification" name="verification-e">公钥e需是小于且与φ(n)互质的正整数!</span>
+											<div class="input-group">
+												<span class="input-group-text">素数p:</span>
+												<input class="form-control" name="parameter-p" placeholder="输入一个素数" type="number">
+												<span class="input-group-text">素数q:</span>
+												<input class="form-control" name="parameter-q" placeholder="输入另一个素数" type="number">
+												<button name="random-pq" class="btn" type="button">随机生成</button>
+											</div>
+											<div class="input-group">
+												<span class="input-group-text">n:</span>
+												<input class="form-control" name="parameter-n" placeholder="n = 素数1 * 素数2" readonly="readonly">
+												<span class="input-group-text">φ(n):</span>
+												<input class="form-control" name="parameter-fn" placeholder="不大于n且与n互质的数的数目" readonly="readonly">
+											</div>
+											<div class="input-group">
+												<span class="input-group-text">公钥e:</span>
+												<input class="form-control" name="parameter-e" placeholder="小于且与φ(n)互质" type=" number" style="text-overflow: ellipsis">
+												<button name="random-e" class="btn" type="button">随机生成</button>
+											</div>
+											<div class="input-group">
+												<span class="input-group-text">私钥d:</span>
+												<input class="form-control" name="parameter-d" placeholder="d·e ≡ 1mod φ (n)" type=" number" readonly="readonly">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</section>
+		</div>
+	</div>
+	<!-- Scripts -->
+	<script>
+		let primes
+	</script>
+
+	<!-- Bootstrap JavaScript Libraries -->
+	<!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script> -->
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/jquery.min.js"></script>
+	<script src="/static/js/jquery.scrollex.min.js"></script>
+	<script src="/static/js/jquery.scrolly.min.js"></script>
+	<script src="/static/js/skel.min.js"></script>
+	<script src="/static/js/util.js"></script>
+	<script src="/static/js/main.js"></script>
+	<script src="/static/js/nav.js"></script>
+	<script src="/static/js/prime.js"></script>
+	<script src="/static/js/course_new.js"></script>
+
+
+</body>
+
+</html>
